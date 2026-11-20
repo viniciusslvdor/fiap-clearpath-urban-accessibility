@@ -1,9 +1,3 @@
-# ---------------------------------------------------------------------------
-# ClearPath: files that must NOT go to GitHub.
-# Committed on purpose: uv.lock, .python-version, the trained model (.joblib),
-# the hand-written blind test, the agency table and the executed notebooks.
-# ---------------------------------------------------------------------------
-
 # --- Python / uv ---
 .venv/
 venv/
@@ -66,6 +60,3 @@ src/tools/
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# --- Claude Code local settings ---
-.claude/settings.local.json
