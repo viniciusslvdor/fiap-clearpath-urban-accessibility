@@ -46,7 +46,6 @@ def process_report(
     text_hash = governance.pseudonym(text)
     lat, lon = governance.reduce_coordinate_precision(lat, lon)
 
-    # The same text sent again within 24 h returns the existing protocol.
     since = db.iso(db.now() - timedelta(hours=24))
     repeated = con.execute(
         "SELECT protocol FROM reports WHERE text_hash=? AND created_at>=?", (text_hash, since)
@@ -54,7 +53,6 @@ def process_report(
     if repeated:
         return {**get_report(con, repeated["protocol"]), "duplicate": True}
 
-    # 2. NLP: category, address and urgency
     if forced_category:
         cat, label, conf, review, alternatives = forced_category, nlp.CATEGORIES[forced_category], 1.0, False, []
     else:
@@ -66,7 +64,6 @@ def process_report(
     with db.transaction(con):
         protocol = db.next_protocol(con)
 
-        # 3. Computer vision (optional)
         analysis = None
         photo_file = analysis_file = None
         if photo:
@@ -81,7 +78,6 @@ def process_report(
                 points += bonus
                 reasons.append(f"photo shows {analysis.level} damage")
 
-        # 4. Grouping: several citizens reporting the same barrier
         root, group_size = routing.find_group(con, cat, lat, lon)
         if group_size:
             points += min(30, 10 * group_size)
@@ -130,7 +126,6 @@ def process_report(
                  json.dumps({"personal_data_removed": anon.found, "photo_without_exif": bool(photo)}),
                  governance.LEGAL_BASIS)
 
-        # 5. Automation: forward to the responsible agency
         routing.forward(con, record)
 
     result = get_report(con, protocol)
@@ -142,7 +137,6 @@ def process_report(
 
 
 def reinforce_occurrence(con: sqlite3.Connection, root: str, new: str):
-    """Each new report about the same barrier raises the priority of the original occurrence."""
     r = con.execute("SELECT urgency_points, priority, status FROM reports WHERE protocol=?", (root,)).fetchone()
     if not r:
         return
@@ -162,7 +156,7 @@ def get_report(con: sqlite3.Connection, protocol: str) -> dict | None:
     if not r:
         return None
     d = dict(r)
-    d.pop("text_hash", None)  # never leaves the API
+    d.pop("text_hash", None)
     d["human_review"] = bool(d["human_review"])
     d["category_label"] = nlp.CATEGORIES.get(d["category"], d["category"])
     d["history"] = [dict(h) for h in con.execute(

@@ -33,7 +33,7 @@ def test_straight_paving_joints_do_not_count_as_cracks():
 def test_removes_exif_metadata():
     buf = io.BytesIO()
     exif = Image.Exif()
-    exif[0x010F] = "PhoneMaker"  # Make
+    exif[0x010F] = "PhoneMaker"
     Image.new("RGB", (64, 64), (150, 150, 150)).save(buf, "JPEG", exif=exif)
     assert Image.open(io.BytesIO(buf.getvalue())).getexif().get(0x010F) == "PhoneMaker"
 

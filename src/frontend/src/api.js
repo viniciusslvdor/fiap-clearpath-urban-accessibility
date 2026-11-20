@@ -1,4 +1,3 @@
-// Client for the ClearPath REST API (FastAPI).
 async function handle(response) {
   const body = await response.json().catch(() => ({}));
   if (!response.ok) {

@@ -1,8 +1,4 @@
-"""Evaluates the vision module on the synthetic images.
-
-    uv run python scripts/evaluate_vision.py calibration   # used to tune the thresholds
-    uv run python scripts/evaluate_vision.py test          # final result (never tune with it!)
-"""
+"""Evaluates the vision module on the synthetic images."""
 from __future__ import annotations
 
 import json
@@ -86,7 +82,6 @@ def scatter_chart(df: pd.DataFrame, path: Path):
 
 
 def examples(folder: Path, path: Path):
-    """Original vs segmentation panel for one image of each class."""
     rows = []
     for level in LEVELS:
         img = cv2.imread(str(folder / file_name(level, 0)))

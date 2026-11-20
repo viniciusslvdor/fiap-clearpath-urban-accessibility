@@ -1,20 +1,4 @@
-"""Handling of messages from the "Ramp Sentinel" sensor (ESP32).
-
-The ESP32 sits next to an accessibility ramp with an HC-SR04 ultrasonic sensor
-pointing at the front of the ramp. If something (usually a car) stays in front of
-it for longer than the limit, it publishes an MQTT event. There is also a button
-so that the person with a disability can confirm the blockage themselves.
-
-JSON published on topic clearpath/fiap-gs/sensors/<id>:
-{
-  "device": "ramp-paulista-01",
-  "location": "Ramp at Av. Paulista x R. Augusta",
-  "lat": -23.5558, "lon": -46.6623,
-  "event": "heartbeat" | "obstruction" | "cleared" | "confirmation",
-  "distance_cm": 42.0,
-  "duration_s": 35
-}
-"""
+"""Handling of messages from the "Ramp Sentinel" sensor (ESP32)."""
 from __future__ import annotations
 
 import json
@@ -43,7 +27,6 @@ def process_message(con: sqlite3.Connection, payload: dict | str | bytes) -> dic
     dist = payload.get("distance_cm")
     dur = payload.get("duration_s")
 
-    # heartbeat only updates "last seen"; the other events change the ramp state
     state = {"cleared": "clear", "obstruction": "blocked", "confirmation": "blocked"}.get(event)
     with db.transaction(con):
         con.execute(

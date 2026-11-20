@@ -1,11 +1,4 @@
-"""Process automation for routing (the "robot" that replaces manual triage).
-
-Automated flow (see docs/architecture.md, simplified BPMN diagram):
-  received -> [classify, prioritize, group] -> forwarded (generates an .eml letter to the agency)
-  -> in_progress -> resolved
-  If the deadline (SLA) expires without resolution: escalated (letter to the Ombudsman).
-  If the classifier's confidence is low: human_triage (not forwarded automatically).
-"""
+"""Process automation for routing (the "robot" that replaces manual triage)."""
 from __future__ import annotations
 
 import json
@@ -43,7 +36,6 @@ def vision_bonus(damage_level: str | None) -> int:
 
 
 def distance_m(lat1, lon1, lat2, lon2) -> float:
-    """Haversine formula."""
     r = 6_371_000
     p1, p2 = math.radians(lat1), math.radians(lat2)
     dp, dl = p2 - p1, math.radians(lon2 - lon1)
@@ -52,8 +44,6 @@ def distance_m(lat1, lon1, lat2, lon2) -> float:
 
 
 def find_group(con: sqlite3.Connection, category: str, lat, lon) -> tuple[str | None, int]:
-    """Open reports of the same category less than GROUPING_RADIUS_M meters away are the same barrier.
-    Returns (root protocol, number of reports already in the group)."""
     if lat is None or lon is None:
         return None, 0
     marks = ",".join("?" * len(OPEN_STATUSES))
@@ -75,7 +65,6 @@ def compute_deadline(priority: str, start: datetime | None = None) -> datetime:
 
 
 def write_letter(report: dict, recipient: dict, subject: str, extra_body: str = "") -> Path:
-    """Generates an .eml message ready to be sent (simulated: it stays in the outbox folder)."""
     config.ensure_dirs()
     msg = EmailMessage()
     msg["From"] = "robot@clearpath.invalid"
@@ -116,7 +105,6 @@ def record_status(con: sqlite3.Connection, protocol: str, status: str, note: str
 
 
 def forward(con: sqlite3.Connection, report: dict) -> Path | None:
-    """Forwards automatically, unless the classifier is unsure."""
     if report["human_review"]:
         record_status(con, report["protocol"], "human_triage",
                       f"Confidence {report['confidence']:.0%} below the threshold: a public servant must confirm the category.")
@@ -131,7 +119,6 @@ def forward(con: sqlite3.Connection, report: dict) -> Path | None:
 
 
 def escalate_overdue(con: sqlite3.Connection, reference: datetime | None = None) -> list[str]:
-    """Scheduled routine (RPA): escalates everything past its deadline to the Ombudsman."""
     reference = reference or db.now()
     overdue = con.execute(
         "SELECT * FROM reports WHERE status IN ('forwarded','in_progress') AND deadline < ?",

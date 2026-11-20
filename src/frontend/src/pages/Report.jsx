@@ -24,7 +24,6 @@ export default function Report({ goTo }) {
   const [locationNote, setLocationNote] = useState("");
   const recognizer = useRef(null);
 
-  // Live pre-classification (NLP) while the person types
   useEffect(() => {
     if (text.trim().length < 15) return setPreview(null);
     const t = setTimeout(() => api.classify(text).then(setPreview).catch(() => setPreview(null)), 600);

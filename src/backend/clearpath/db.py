@@ -1,11 +1,4 @@
-"""Persistence with SQLite (Python standard library).
-
-Data model (see docs/data_governance.md for the full data dictionary):
-- reports: one row per submission, already anonymized;
-- history: trail of status changes (transparency for the citizen);
-- audit_log: record of every data processing step (LGPD, art. 37);
-- iot_devices / iot_readings: ESP32 sensors.
-"""
+"""Persistence with SQLite (Python standard library)."""
 from __future__ import annotations
 
 import sqlite3

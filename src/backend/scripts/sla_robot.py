@@ -1,17 +1,4 @@
-"""Follow-up robot (scheduled RPA).
-
-The routine a public servant would do by hand every day:
- 1. Finds forwarded reports whose deadline (SLA) has passed and escalates them to the
-    Ombudsman (the .eml letter is generated automatically).
- 2. Applies the retention policy: deletes photos of reports resolved more than 90 days ago.
- 3. Generates the daily consolidated report per agency, as CSV (for spreadsheets) and HTML
-    (for quick reading), in src/data/runtime/reports.
-
-Usage:
-    uv run python scripts/sla_robot.py                 # runs once
-    uv run python scripts/sla_robot.py --loop 3600     # runs every hour (simple scheduler)
-On Windows it can also be scheduled with Task Scheduler; on Linux, with cron.
-"""
+"""Follow-up robot (scheduled RPA)."""
 from __future__ import annotations
 
 import argparse

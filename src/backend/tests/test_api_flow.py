@@ -47,7 +47,7 @@ def test_full_flow_with_photo_and_personal_data():
     assert d["category"] == "damaged_sidewalk"
     assert "[CPF]" in d["anonymized_text"] and "111.222" not in d["anonymized_text"]
     assert d["personal_data_removed"] == {"CPF": 1}
-    assert d["lat"] == -23.5801  # reduced precision
+    assert d["lat"] == -23.5801
     assert d["image_analysis"]["level"] == "severe"
     assert d["priority"] == "critical"
     assert d["status"] == "forwarded"
@@ -57,7 +57,6 @@ def test_full_flow_with_photo_and_personal_data():
     assert (config.MEDIA_DIR / d["photo_analysis"]).exists()
     assert "text_hash" not in d
 
-    # Tracking by protocol
     assert client.get(f"/api/reports/{d['protocol']}").json()["status"] == "forwarded"
 
 
@@ -69,8 +68,8 @@ def test_same_text_again_returns_same_protocol():
 
 def test_groups_reports_about_the_same_barrier():
     a = submit("there is no ramp at all at this corner", -23.5000, -46.6000).json()
-    b = submit("missing access ramp here, wheelchair users cannot get up", -23.50015, -46.60012).json()  # ~20 m
-    c = submit("missing access ramp at the other corner of the neighborhood", -23.5100, -46.6000).json()  # ~1.1 km
+    b = submit("missing access ramp here, wheelchair users cannot get up", -23.50015, -46.60012).json()
+    c = submit("missing access ramp at the other corner of the neighborhood", -23.5100, -46.6000).json()
     assert b["group_root"] == a["protocol"]
     assert c["group_root"] is None
     root = client.get(f"/api/reports/{a['protocol']}").json()
@@ -136,7 +135,7 @@ def test_iot_obstruction_confirmation_clearance():
 def test_retention_deletes_photos_of_old_resolved_reports():
     d = submit("sidewalk with big cracks near the market", photo=jpg("moderate", 11)).json()
     client.patch(f"/api/reports/{d['protocol']}/status", json={"status": "resolved"})
-    assert d["protocol"] not in service.apply_retention(con)  # resolved today: kept
+    assert d["protocol"] not in service.apply_retention(con)
     in_91_days = db.now() + timedelta(days=config.PHOTO_RETENTION_DAYS + 1)
     assert d["protocol"] in service.apply_retention(con, in_91_days)
     assert client.get(f"/api/reports/{d['protocol']}").json()["photo"] is None

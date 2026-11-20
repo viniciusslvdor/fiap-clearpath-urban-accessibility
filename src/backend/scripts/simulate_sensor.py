@@ -1,10 +1,4 @@
-"""Simulates the ESP32 publishing to the MQTT broker (useful without Wokwi open).
-
-Publishes the same sequence of messages as the firmware: heartbeat -> obstruction ->
-confirmation by the button -> cleared.
-
-    uv run python scripts/simulate_sensor.py
-"""
+"""Simulates the ESP32 publishing to the MQTT broker (useful without Wokwi open)."""
 from __future__ import annotations
 
 import json

@@ -37,7 +37,7 @@ export default function Dashboard() {
   };
   useEffect(() => {
     load();
-    const t = setInterval(load, 15000); // sensors refresh on their own
+    const t = setInterval(load, 15000);
     return () => clearInterval(t);
   }, []);
 

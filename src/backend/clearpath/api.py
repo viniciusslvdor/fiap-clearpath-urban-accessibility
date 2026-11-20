@@ -1,8 +1,4 @@
-"""ClearPath REST API (FastAPI).
-
-    uv run uvicorn clearpath.api:app --reload --port 8000
-    Interactive documentation (Swagger): http://localhost:8000/docs
-"""
+"""ClearPath REST API (FastAPI)."""
 from __future__ import annotations
 
 from collections import Counter
@@ -65,7 +61,6 @@ def categories():
 
 @app.post("/api/classify")
 def classify(req: ClassifyRequest):
-    """Preview: shows the citizen how the text will be understood, without storing anything."""
     anon = governance.anonymize(req.text)
     c = nlp.classify(anon.text)
     points, reasons = nlp.score_urgency(anon.text, c.category)
@@ -97,7 +92,7 @@ async def create_report(
     content = await photo.read() if photo and photo.filename else None
     try:
         return service.process_report(con, text, lat, lon, content)
-    except ValueError as e:  # includes service.ValidationError
+    except ValueError as e:
         raise HTTPException(422, str(e))
 
 
@@ -128,7 +123,6 @@ def get_report(protocol: str):
 
 @app.patch("/api/reports/{protocol}/status")
 def update_status(protocol: str, body: StatusUpdate):
-    """Used by the responsible agency to report progress."""
     if not service.get_report(con, protocol):
         raise HTTPException(404, "Protocol not found.")
     try:
@@ -149,13 +143,11 @@ def erase_data(protocol: str):
 
 @app.post("/api/automation/escalate")
 def escalate(reference: datetime | None = None):
-    """Triggers the escalation routine (normally scheduled; see scripts/sla_robot.py)."""
     return {"escalated": routing.escalate_overdue(con, reference)}
 
 
 @app.post("/api/iot/readings")
 def iot_reading(reading: IoTReading):
-    """HTTP alternative to the MQTT bridge (useful for testing)."""
     try:
         return iot.process_message(con, reading.model_dump())
     except service.ValidationError as e:
@@ -174,7 +166,6 @@ def devices():
 
 @app.get("/api/indicators")
 def indicators():
-    """Impact indicators (see the SDG section of the report)."""
     reports = [dict(r) for r in con.execute("SELECT * FROM reports")]
     hist = [dict(r) for r in con.execute("SELECT protocol, at, status FROM history ORDER BY id")]
     resolved_at = {h["protocol"]: h["at"] for h in hist if h["status"] == "resolved"}

@@ -1,16 +1,4 @@
-"""Data governance and protection (LGPD - Brazil's General Data Protection Law, Law 13,709/2018).
-
-Principles applied:
-- Minimization: the system does NOT ask for name, CPF (Brazilian taxpayer ID) or contact details.
-  Citizens track their report with the protocol number.
-- Anonymization on input: if a person writes personal data in the text, it is masked
-  before anything is stored.
-- Pseudonymization: we keep only a hash (SHA-256 + salt) of the original text to detect
-  repeated submissions, never the original.
-- Metadata removal: photos are decoded and re-encoded, which drops EXIF data (including the
-  phone's GPS position and device model).
-- Traceability: every processing step writes an audit record (what, when, legal basis).
-"""
+"""Data governance and protection (LGPD - Brazil's General Data Protection Law, Law 13,709/2018)."""
 from __future__ import annotations
 
 import hashlib
@@ -40,7 +28,6 @@ class AnonymizationResult:
 
 
 def anonymize(text: str) -> AnonymizationResult:
-    """Replaces personal data with markers such as [CPF] and counts what was removed."""
     found: dict[str, int] = {}
     out = text
     for label, pattern in PATTERNS:
@@ -54,13 +41,10 @@ def anonymize(text: str) -> AnonymizationResult:
 
 
 def pseudonym(value: str) -> str:
-    """Irreversible salted hash, used only to detect duplicates."""
     return hashlib.sha256((config.HASH_SALT + value.strip().lower()).encode("utf-8")).hexdigest()[:16]
 
 
 def reduce_coordinate_precision(lat: float | None, lon: float | None, places: int = 4):
-    """4 decimal places = ~11 m. Enough to find the barrier, and it avoids exposing
-    the exact position of the person who reported it (for example, their own home)."""
     if lat is None or lon is None:
         return None, None
     return round(lat, places), round(lon, places)

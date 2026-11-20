@@ -1,14 +1,4 @@
-"""Natural language processing of citizen reports.
-
-Steps:
-1. Preprocessing: lowercase, accent removal, anonymization markers, digits and
-   punctuation removed; tokenization and stopword removal.
-2. Representation: word TF-IDF (1- and 2-grams) combined with character n-gram
-   TF-IDF (3 to 5). Character n-grams make the model tolerant to typos
-   ("sidewlak", "side walk") and to inflections ("ramp"/"ramps").
-3. Classification: linear model trained in scripts/train_model.py.
-4. Information extraction: address and urgency signals through lexical rules.
-"""
+"""Natural language processing of citizen reports."""
 from __future__ import annotations
 
 import re
@@ -29,7 +19,7 @@ CATEGORIES = {
     "accessible_transit": "Accessible public transit",
 }
 
-CONFIDENCE_THRESHOLD = 0.50  # below this the report goes to human triage (see report, NLP section)
+CONFIDENCE_THRESHOLD = 0.50  # below this the report goes to human triage
 
 STOPWORDS = set(
     """a about after all also am an and any are as at be been but by can could did do does for from
@@ -50,7 +40,6 @@ def remove_accents(text: str) -> str:
 
 
 def normalize(text: str) -> str:
-    """Clean text used by the vectorizers (this function is also referenced by the saved pipeline)."""
     t = _MARKER_RE.sub(" ", text)
     t = remove_accents(t.lower())
     t = t.replace("'", "")
@@ -62,10 +51,7 @@ def tokenize(text: str) -> list[str]:
     return [tok for tok in normalize(text).split() if tok not in STOPWORDS and len(tok) > 1]
 
 
-# ----------------------------------------------------------------- urgency ---
-# Weights chosen by hand: people most exposed to risk and reports of physical
-# harm raise the priority. The list is explainable and auditable, unlike an opaque
-# model, which is desirable in a public service.
+# Weights chosen by hand: explainable and auditable, unlike an opaque model.
 URGENCY_SIGNALS: dict[str, tuple[int, str]] = {
     r"\b(fell|fall|falls|falling|tripped|trip|injured|injury|hurt|accident|run over|hit by)\b": (30, "fall or accident reported"),
     r"\b(wheelchair|blind|visually impaired|white cane|cane|low vision|crutches|walker)\b": (20, "person with disability affected"),
@@ -79,8 +65,6 @@ URGENCY_SIGNALS: dict[str, tuple[int, str]] = {
 }
 _COMPILED_SIGNALS = [(re.compile(p), w, reason) for p, (w, reason) in URGENCY_SIGNALS.items()]
 
-# Base weight per category: failures that remove the autonomy of blind people or
-# wheelchair users (no alternative route) start higher.
 CATEGORY_WEIGHT = {
     "damaged_sidewalk": 20,
     "sidewalk_obstruction": 15,
@@ -102,14 +86,11 @@ def score_urgency(text: str, category: str) -> tuple[int, list[str]]:
     return min(points, 100), reasons
 
 
-# ----------------------------------------------------------------- address ---
 _NAME = r"[A-Z][\w'À-ÿ.]*(?:\s+(?:d[aeo]s?|[A-Z][\w'À-ÿ.]*)){0,4}"
-# São Paulo style: "Rua Augusta, 1500", "Av. Paulista" (street names are proper nouns)
 _ADDRESS_PREFIX_RE = re.compile(
     rf"\b((?:Rua|R\.|Avenida|Av\.?|Alameda|Al\.|Travessa|Estrada|Praça|Praca|Largo)\s+{_NAME})"
     r"(?:,?\s*(?:no\.?|n[ºo°]\.?|number|#)?\s*(\d{1,5}))?"
 )
-# English style: "1500 Augusta Street", "Paulista Avenue"
 _ADDRESS_SUFFIX_RE = re.compile(
     r"\b(?:(\d{1,5})\s+)?((?:[A-Z][\w'À-ÿ]*\s+){1,4}(?:Street|St\.|Avenue|Ave\.|Road|Rd\.|Boulevard|Square|Lane))"
     r"(?:,?\s*(?:no\.?|number|#)\s*(\d{1,5}))?"
@@ -136,7 +117,6 @@ def extract_address(text: str) -> str | None:
     return None
 
 
-# ---------------------------------------------------------- classification ---
 @dataclass
 class Classification:
     category: str

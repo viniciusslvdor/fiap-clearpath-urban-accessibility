@@ -1,27 +1,9 @@
-/*
- * ClearPath - Ramp Sentinel (ESP32)
- * ---------------------------------
- * An HC-SR04 ultrasonic sensor sits next to an accessibility ramp, pointing
- * at the front of it. If something (usually a car) stays closer than
- * THRESHOLD_CM for longer than OBSTRUCTION_TIME_MS, the ramp is considered
- * BLOCKED and the ESP32 publishes an MQTT event. When the front of the ramp
- * stays clear for CLEAR_TIME_MS, it publishes "cleared".
- *
- * Blue button: the person with a disability who found the ramp blocked
- * presses the button to CONFIRM the blockage, which raises the report's priority.
- * The buzzer gives audible feedback (important for blind people).
- *
- * Green LED = ramp clear | Red LED = ramp blocked
- *
- * Simulation: https://wokwi.com (open diagram.json + sketch.ino + libraries.txt)
- * In Wokwi, click the HC-SR04 sensor during the simulation to change the distance.
- */
+// ClearPath - Ramp Sentinel (ESP32): detects a car blocking an accessibility ramp and publishes MQTT events.
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
-// ---------- Configuration ----------
-const char* WIFI_SSID     = "Wokwi-GUEST";   // Wokwi's virtual network
+const char* WIFI_SSID     = "Wokwi-GUEST";
 const char* WIFI_PASSWORD = "";
 const char* MQTT_BROKER   = "broker.hivemq.com";
 const int   MQTT_PORT     = 1883;
@@ -39,7 +21,6 @@ const unsigned long OBSTRUCTION_TIME_MS = 10000;  // 10 s in the demo (60 s in t
 const unsigned long CLEAR_TIME_MS       = 5000;
 const unsigned long HEARTBEAT_MS        = 60000;
 
-// ---------- Pins ----------
 const int PIN_TRIG      = 5;
 const int PIN_ECHO      = 18;
 const int PIN_BUTTON    = 4;
@@ -57,14 +38,13 @@ unsigned long lastHeartbeat = 0;
 unsigned long lastButton = 0;
 float currentDistance = 400;
 
-// ---------- Sensor ----------
 float readDistanceCm() {
   digitalWrite(PIN_TRIG, LOW);
   delayMicroseconds(2);
   digitalWrite(PIN_TRIG, HIGH);
   delayMicroseconds(10);
   digitalWrite(PIN_TRIG, LOW);
-  unsigned long us = pulseIn(PIN_ECHO, HIGH, 30000);  // ~5 m timeout
+  unsigned long us = pulseIn(PIN_ECHO, HIGH, 30000);
   if (us == 0) return 400;
   return us / 58.0;
 }
@@ -79,7 +59,6 @@ float filteredDistance() {
   return v[2];
 }
 
-// ---------- Outputs ----------
 void beep(int times, int ms) {
   for (int i = 0; i < times; i++) {
     tone(PIN_BUZZER, 1800, ms);
@@ -92,7 +71,6 @@ void showState(bool blocked) {
   digitalWrite(PIN_LED_GREEN, blocked ? LOW : HIGH);
 }
 
-// ---------- Network ----------
 void connectWiFi() {
   Serial.print("Connecting to Wi-Fi");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD, 6);
@@ -128,7 +106,6 @@ void publish(const char* event, unsigned long durationMs = 0) {
   Serial.printf("[MQTT %s] %s\n", ok ? "sent" : "FAILED", buf);
 }
 
-// ---------- Program ----------
 void setup() {
   Serial.begin(115200);
   pinMode(PIN_TRIG, OUTPUT);
@@ -189,7 +166,7 @@ void loop() {
   if (digitalRead(PIN_BUTTON) == LOW && now - lastButton > 1500) {
     lastButton = now;
     publish("confirmation");
-    beep(2, 120);  // audible feedback: "received"
+    beep(2, 120);
   }
 
   if (now - lastHeartbeat >= HEARTBEAT_MS) {

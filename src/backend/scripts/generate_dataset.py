@@ -1,14 +1,4 @@
-"""Generates the DEMO (synthetic) dataset of accessibility barrier reports.
-
-IMPORTANT: the texts are synthetic. They are built from sentence templates written for
-this project, inspired by the vocabulary of public maintenance complaints and by the items
-of the ABNT NBR 9050 accessibility standard. No report comes from a real citizen.
-Personal data (CPF, phone, e-mail) is made up and appears on purpose, to test the
-anonymization step.
-
-Usage:
-    uv run python scripts/generate_dataset.py            # writes src/data/reports_train.csv
-"""
+"""Generates the DEMO (synthetic) dataset of accessibility barrier reports."""
 from __future__ import annotations
 
 import csv
@@ -154,7 +144,6 @@ def _email(r: random.Random) -> str:
 
 
 def _noise(text: str, r: random.Random) -> str:
-    """Simulates informal writing: no apostrophes, mixed case and typos."""
     if r.random() < 0.30:
         text = text.replace("'", "")
     if r.random() < 0.15:

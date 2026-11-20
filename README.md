@@ -48,8 +48,7 @@ Brazil's 2022 Census (IBGE) counted **14.4 million people with disabilities** (7
 The training data and sidewalk images are **synthetic**, and the dashboard uses **simulated** dates and agency responses; all of this is identified in [`src/data/README.md`](src/data/README.md). The letters are `.eml` files generated locally and are not sent to real agencies.
 
 **Links:**
-- 🔌 Wokwi simulation: [https://wokwi.com/projects/481174110278029313](https://wokwi.com/projects/481174110278029313)
-- **Competition participation:** [ ] Yes, I accept to participate / [x] I will not participate.
+- Wokwi simulation: [https://wokwi.com/projects/481174110278029313](https://wokwi.com/projects/481174110278029313)
 
 
 ## Folder structure

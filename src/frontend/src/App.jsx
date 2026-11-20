@@ -28,7 +28,6 @@ function savePreference(key, value) {
 }
 
 export default function App() {
-  // Hash in the form #page or #track/CP-2026-000001 (direct link to a protocol)
   const readHash = () => {
     const [id, extra = ""] = location.hash.slice(1).split("/");
     return PAGES.some((p) => p.id === id) ? { id, extra: decodeURIComponent(extra) } : { id: "report", extra: "" };

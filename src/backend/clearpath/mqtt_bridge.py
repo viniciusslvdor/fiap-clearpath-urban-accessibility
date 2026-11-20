@@ -1,11 +1,4 @@
-"""MQTT -> ClearPath bridge. Subscribes to the sensors' topic and processes each message.
-
-    uv run python -m clearpath.mqtt_bridge
-
-Uses the public broker broker.hivemq.com (the same one configured on the Wokwi ESP32).
-A public broker is fine for a demo. In production we would use our own broker with
-TLS (port 8883) and a username/password per device.
-"""
+"""MQTT -> ClearPath bridge. Subscribes to the sensors' topic and processes each message."""
 from __future__ import annotations
 
 import logging
@@ -29,7 +22,7 @@ def main():
         try:
             result = iot.process_message(con, msg.payload)
             log.info("%s -> %s", msg.topic, result)
-        except Exception as e:  # a bad message must not bring the bridge down
+        except Exception as e:
             log.warning("Message ignored on %s: %s", msg.topic, e)
 
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="clearpath-bridge")

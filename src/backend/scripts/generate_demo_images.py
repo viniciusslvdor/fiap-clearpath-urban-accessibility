@@ -1,17 +1,4 @@
-"""Generates SYNTHETIC sidewalk images to calibrate and test the vision module.
-
-Why synthetic: we did not find a public, labeled dataset of Brazilian sidewalks
-with a clear license. Generating the images gives full control over the label
-(we know exactly where the cracks are), but they are "cleaner" than real photos.
-This limitation is documented in the report.
-
-Two sets, with different seeds:
-- calibration (seed 1): used to choose the damage index thresholds;
-- test (seed 2): used ONLY to measure the final performance.
-
-Usage:
-    uv run python scripts/generate_demo_images.py
-"""
+"""Generates SYNTHETIC sidewalk images to calibrate and test the vision module."""
 from __future__ import annotations
 
 import csv
@@ -56,7 +43,7 @@ def crack(img: np.ndarray, rng: np.random.Generator):
     for _ in range(int(rng.integers(25, 60))):
         ang += rng.normal(0, 0.45)
         nx, ny = x + 9 * np.cos(ang), y + 9 * np.sin(ang)
-        if not (10 < nx < W - 10 and 10 < ny < H - 10):  # "bounce" at the border so the crack stays visible
+        if not (10 < nx < W - 10 and 10 < ny < H - 10):
             ang += np.pi
             nx, ny = x + 9 * np.cos(ang), y + 9 * np.sin(ang)
         x, y = nx, ny
@@ -65,7 +52,6 @@ def crack(img: np.ndarray, rng: np.random.Generator):
     thickness = int(rng.integers(2, 5))
     dark = int(rng.integers(25, 60))
     cv2.polylines(img, [pts], False, (dark,) * 3, thickness, cv2.LINE_AA)
-    # branch
     if rng.random() < 0.6:
         i = int(rng.integers(3, len(pts) - 2))
         branch = pts[i:i + int(rng.integers(5, 15))] + rng.integers(-25, 25, (1, 2))
@@ -86,7 +72,6 @@ def pothole(img: np.ndarray, rng: np.random.Generator):
 
 
 def light_stain(img: np.ndarray, rng: np.random.Generator):
-    """Dirt stain: only slightly darker, NOT damage (tests false positives)."""
     cx, cy = int(rng.uniform(50, W - 50)), int(rng.uniform(50, H - 50))
     over = img.copy()
     cv2.ellipse(over, (cx, cy), (int(rng.uniform(20, 60)), int(rng.uniform(15, 40))), rng.uniform(0, 180), 0, 360,

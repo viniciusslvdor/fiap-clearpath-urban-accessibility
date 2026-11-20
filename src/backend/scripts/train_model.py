@@ -1,14 +1,4 @@
-"""Trains and evaluates the report classifier.
-
-1. Stratified 5-fold cross-validation on the synthetic dataset, comparing 3 models.
-2. Final evaluation on the BLIND TEST set (60 sentences written separately,
-   with vocabulary different from the generator's templates). This is the most honest metric.
-3. Saves the best pipeline to models/, the charts to assets/charts/ and the metrics to
-   docs/other/evidence/.
-
-Usage:
-    uv run python scripts/train_model.py
-"""
+"""Trains and evaluates the report classifier."""
 from __future__ import annotations
 
 import json

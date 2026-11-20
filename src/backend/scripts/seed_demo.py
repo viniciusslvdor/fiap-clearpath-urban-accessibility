@@ -1,13 +1,4 @@
-"""Fills the database with a DEMO (simulated) dataset for the dashboard and the video.
-
-The reports go through the real pipeline (anonymization, NLP, vision, routing,
-automation). What is simulated is the TIMELINE: dates are moved back up to 30 days
-and the agencies' progress (in progress/resolved) is randomly drawn. Therefore every
-dashboard indicator built from this data is ILLUSTRATIVE and does not measure real impact.
-
-Usage:
-    uv run python scripts/seed_demo.py            # wipes the runtime folder and rebuilds it
-"""
+"""Fills the database with a DEMO (simulated) dataset for the dashboard and the video."""
 from __future__ import annotations
 
 import random
@@ -23,7 +14,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from clearpath import config, db, iot, routing, service  # noqa: E402
 from generate_dataset import TEMPLATES, generate_report  # noqa: E402
 
-# Reference points in São Paulo (lat, lon) around which reports are drawn.
 REGIONS = [
     (-23.5614, -46.6559, "Av. Paulista"),
     (-23.5489, -46.6388, "Downtown / Sé"),
@@ -33,7 +23,6 @@ REGIONS = [
     (-23.4950, -46.6990, "Freguesia do Ó"),
     (-23.5340, -46.7380, "Lapa"),
 ]
-# "Hot spots": the same barrier reported by several people (tests grouping).
 HOT_SPOTS = [
     (-23.55785, -46.66230, "damaged_sidewalk"),
     (-23.54512, -46.63391, "ramp_access"),
@@ -52,7 +41,6 @@ def shift_timeline(con, protocol: str, days: float):
 
 
 def advance_status(con, protocol: str, days_ago: float, rng: random.Random):
-    """Simulates the agency's response: some reports are resolved on time, some are late."""
     r = con.execute("SELECT status FROM reports WHERE protocol=?", (protocol,)).fetchone()
     if r["status"] != "forwarded" or days_ago < 1:
         return
@@ -87,7 +75,7 @@ def main(n_reports: int = 140, seed: int = 7):
     photos = {n: sorted(img_dir.glob(f"{n}_*.jpg")) for n in ("moderate", "severe", "no_visible_damage")}
 
     for i, (text, cat) in enumerate(texts):
-        if i < 12:  # the first reports go to the hot spots
+        if i < 12:
             lat, lon, hot_cat = HOT_SPOTS[i % 3]
             text = next(t for t, c in texts[12:] if c == hot_cat)
             text = f"{text} (report {i})"
@@ -110,7 +98,6 @@ def main(n_reports: int = 140, seed: int = 7):
             shift_timeline(con, rep["protocol"], days)
             advance_status(con, rep["protocol"], days, rng)
 
-    # Ramp sensor (the same messages the ESP32 publishes)
     ramp = {"device": "ramp-paulista-01", "location": "Ramp at Av. Paulista x R. Augusta", "lat": -23.5558, "lon": -46.6623}
     for msg in [
         {**ramp, "event": "heartbeat", "distance_cm": 310},
