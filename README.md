@@ -60,12 +60,12 @@ Among the files and folders present in the root of the project, the following ar
 
 - <b>assets</b>: contains the files related to unstructured elements of this repository, such as images.
   - `charts/`: evaluation charts (model comparison, confusion matrix, damage index, vision pipeline steps).
-  - `screenshots/`: screenshots of the React app (report, tracking, map, dashboard, high contrast, mobile).
+  - `screenshots/`: screenshot of the React app used in the report.
 
 - <b>document</b>: contains all the project documents requested throughout the activities. In the "other" subfolder, add complementary and less important documents.
   - `ClearPath_GS2026-2_relatorio.pdf`: the submission report, in Portuguese (generated from `relatorio.md`).
-  - `architecture.md`, `data_governance.md`, `video_script.md`.
-  - `other/evidence/`: metrics (JSON/CSV), blind-test errors, full `pytest` output and a sample generated letter.
+  - `architecture.md`, `data_governance.md`.
+  - `other/evidence/`: metrics (JSON/CSV), blind-test errors and the full `pytest` output.
 
 - <b>notebooks</b>: Jupyter notebooks, already executed.
   - `results_overview.ipynb`: **quickest way to see every result**. It shows a summary table, NLP and vision metrics, the test counts and a live run of the whole pipeline (report → letter → grouping → IoT → escalation → erasure) on a temporary database.
