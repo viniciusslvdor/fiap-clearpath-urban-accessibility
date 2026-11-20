@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # ClearPath: files that must NOT go to GitHub.
 # Committed on purpose: uv.lock, .python-version, the trained model (.joblib),
-# the datasets and demo images in src/data/ and the executed notebooks.
+# the hand-written blind test, the agency table and the executed notebooks.
 # ---------------------------------------------------------------------------
 
 # --- Python / uv ---
@@ -29,6 +29,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# --- Generated data (deterministic: recreated by the scripts in src/backend/scripts) ---
+src/data/reports_train.csv
+src/data/demo_images/
 
 # --- Runtime data created by the app (database, uploaded photos, letters, robot reports) ---
 src/data/runtime/

@@ -51,13 +51,61 @@ The training data and sidewalk images are **synthetic**, and the dashboard uses 
 - Wokwi simulation: [https://wokwi.com/projects/481174110278029313](https://wokwi.com/projects/481174110278029313)
 
 
+## The system in action
+
+**Reporting a barrier.** While the person types, the NLP shows how the text was understood and warns about personal data, which is removed before saving.
+
+![Report form with the live NLP preview and the personal data warning](assets/screenshots/screen_report_preview.png)
+
+**Result.** Protocol, explained priority, responsible agency, deadline and the automatic photo analysis (cracks in red, potholes in orange).
+
+![Report result with protocol, priority and photo analysis](assets/screenshots/screen_report_result.png)
+
+**Barrier map.** Each dot is an open report, colored by category (simulated demo data).
+
+![Map of São Paulo with the reported barriers as colored dots](assets/screenshots/screen_map.png)
+
+**Impact dashboard** (simulated demo data).
+
+![Impact dashboard with indicators, charts and ramp sensors](assets/screenshots/screen_dashboard.png)
+
+## Synthetic data examples
+
+All data below is **fictitious**.
+
+**Training reports** (`reports_train.csv`, generated from sentence templates with typos, mixed case and fake personal data inserted on purpose to test the anonymization):
+
+| Text | Category |
+|---|---|
+| urgent! sidewalk full of potholes adn cracks next to the hospital, i have reduced mobility, i get stuck and cant cross someone needs to look at this. | `damaged_sidewalk` |
+| Hello, broken tile on the sidewalk, you can twist your ankle, I can't get through, contact: carlos8883@example.com | `damaged_sidewalk` |
+| Hello, tactile pavnig faded and broken in front of the church, nobody fixes it, number 2008!! | `tactile_paving` |
+| Please, faded crosswalk on Av. Sapopemba, I almost fell yesterday, number 2282 Thank you. | `crossing_signal` |
+
+**Blind test** (`reports_blind_test.csv`, written separately with different vocabulary and never used in training):
+
+| Text | Category |
+|---|---|
+| The sidewalk on my street looks like Swiss cheese, holes everywhere | `damaged_sidewalk` |
+| They installed tactile tiles the same color as the floor, people with low vision can't see them | `tactile_paving` |
+| Elderly people cannot cross within the signal time | `crossing_signal` |
+| The gap between the train and the platform is dangerous | `accessible_transit` |
+
+**Sidewalk images** (`demo_images/`, generated with concrete texture, paving joints, stains, cracks and potholes):
+
+![Synthetic sidewalk images: no visible damage, moderate and severe](assets/samples/synthetic_sidewalks.png)
+
+The generated files (`reports_train.csv` and `demo_images/`) are **not stored in Git**: the generators use fixed seeds and recreate them byte for byte (see [How to run the code](#how-to-run-the-code)).
+
+
 ## Folder structure
 
 Among the files and folders present in the root of the project, the following are defined:
 
 - <b>assets</b>: contains the files related to unstructured elements of this repository, such as images.
   - `charts/`: evaluation charts (model comparison, confusion matrix, damage index, vision pipeline steps).
-  - `screenshots/`: screenshot of the React app (report submission result).
+  - `screenshots/`: screenshots of the React app (report, result, map, dashboard).
+  - `samples/`: examples of the synthetic sidewalk images.
 
 - <b>docs</b>: contains all the project documents requested throughout the activities. In the "other" subfolder, add complementary and less important documents.
   - `architecture.md`, `data_governance.md`.
@@ -71,7 +119,7 @@ Among the files and folders present in the root of the project, the following ar
   - `backend/`: `clearpath` Python package (FastAPI API, NLP, vision, governance, routing, IoT), `scripts/` (data generation, training, evaluation, SLA robot, demo data, sensor simulator), `tests/` and the trained model.
   - `frontend/`: React app (Vite, Leaflet, Recharts).
   - `iot/`: ESP32 firmware and circuit for Wokwi, Node-RED flow and [instructions](src/iot/README.md).
-  - `data/`: datasets and agency table, with a [README](src/data/README.md) describing origin and limitations. `data/runtime/` (database, photos, letters) is created at runtime and kept out of Git.
+  - `data/`: blind test, agency table and a [README](src/data/README.md) describing origin and limitations. The generated data (`reports_train.csv`, `demo_images/`) and `data/runtime/` (database, photos, letters) are created by the scripts and kept out of Git.
 
 - <b>pyproject.toml</b> and <b>uv.lock</b>: Python dependencies, managed with [uv](https://docs.astral.sh/uv/). `uv.lock` pins the exact versions that were tested; `.python-version` selects Python 3.13.
 
@@ -86,9 +134,9 @@ Among the files and folders present in the root of the project, the following ar
 uv sync                                         # creates .venv with the exact versions from uv.lock
 
 cd src/backend
-uv run python scripts/generate_dataset.py       # synthetic report dataset
+uv run python scripts/generate_dataset.py       # synthetic report dataset (not in Git)
 uv run python scripts/train_model.py            # trains, evaluates and saves the model + charts
-uv run python scripts/generate_demo_images.py   # synthetic sidewalk images
+uv run python scripts/generate_demo_images.py   # synthetic sidewalk images (not in Git)
 uv run python scripts/evaluate_vision.py test   # evaluates the computer vision module
 uv run python scripts/seed_demo.py              # demo data for the dashboard
 uv run pytest -v                                # 39 tests
@@ -110,7 +158,7 @@ uv run python scripts/simulate_sensor.py        # (optional) simulates the ESP32
 uv run python scripts/sla_robot.py              # robot: escalates missed deadlines, applies retention, writes the report
 ```
 
-To see all results without starting the servers, open `notebooks/results_overview.ipynb` (already executed) or run it again with `uv run jupyter notebook` from `notebooks/`.
+To see all results without starting the servers, open `notebooks/results_overview.ipynb` (already executed). To run the notebooks again, first generate the data (step 1), then use `uv run jupyter notebook` from `notebooks/`.
 
 ESP32 on Wokwi and Node-RED: see [`src/iot/README.md`](src/iot/README.md).
 

@@ -33,22 +33,7 @@ Topic: `clearpath/fiap-gs/sensors/ramp-paulista-01` · Broker: `broker.hivemq.co
 
 ## How to simulate on Wokwi
 
-Project already created: https://wokwi.com/projects/481174110278029313 (open it and click ▶).
-
-To build it from scratch:
-
-1. Go to https://wokwi.com/projects/new/esp32.
-2. Replace the content of `sketch.ino` and `diagram.json` with the files in `wokwi/`.
-3. Create the `libraries.txt` file ("Library Manager" tab → "+") with `PubSubClient` and `ArduinoJson`.
-4. Click ▶. The Serial Monitor shows the Wi-Fi connection and every MQTT message published.
-5. Click the HC-SR04 sensor and drag the distance below 80 cm. After 10 s the LED turns red and the `obstruction` event is sent.
-6. Click the blue button to send `confirmation`. Move the distance back above 100 cm for `cleared`.
-
-For the event to become a report in the system, keep the MQTT bridge running on the computer (`uv run python -m clearpath.mqtt_bridge`, see the main README).
-
-> ⚠️ **Test status:** the firmware has **not been run on Wokwi yet**. It must be run and the evidence recorded (screenshot of the Serial Monitor and the LEDs) before submission. If something fails, fix it and only then describe it as working in the report.
->
-> Without Wokwi open, `uv run python scripts/simulate_sensor.py` publishes the same sequence of messages. This path was tested: the public broker delivered the 4 messages and the bridge created the report, reinforced it and recorded the clearance.
+Project already created: https://wokwi.com/projects/481174110278029313.
 
 ## Node-RED (sensor dashboard)
 

@@ -9,6 +9,8 @@
 | `responsible_agencies.json` | Real São Paulo agencies and real Brazilian regulations (Brazilian Inclusion Law, NBR 9050, NBR 16537, Traffic Code, Law 10,098/2000) | Real agencies, **fictitious e-mails** (`.invalid`) | Automatic routing and deadlines (SLA) |
 | `runtime/` (not in Git) | Created by `seed_demo.py` and by the API | **Simulated** (dates and agency responses are randomly drawn) | SQLite database, processed photos, `.eml` letters and robot reports |
 
+The generated files (`reports_train.csv` and `demo_images/`) are **not stored in Git**. The generators use fixed seeds, so `generate_dataset.py` and `generate_demo_images.py` recreate them byte for byte.
+
 ## Real data used in the justification (not used by the code)
 
 - IBGE (Brazilian Institute of Geography and Statistics), 2022 Census, *Persons with Disabilities*: 14.4 million people with disabilities (7.3% of the population aged 2 or older).
