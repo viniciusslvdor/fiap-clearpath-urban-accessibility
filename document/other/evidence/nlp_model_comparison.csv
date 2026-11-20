@@ -1,0 +1,4 @@
+model,f1_cv,f1_cv_std,f1_blind_test,accuracy_blind_test
+Naive Bayes (words),0.9977,0.0045,0.8991,0.9
+Logistic Regression (words + characters),1.0,0.0,0.8987,0.9
+Calibrated linear SVM (words + characters),1.0,0.0,0.8814,0.8833

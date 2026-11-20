@@ -1,0 +1,48 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\Vinicius\Desktop\Files\Projects\fiap-global-solution\.venv\Scripts\python.exe
+rootdir: C:\Users\Vinicius\Desktop\Files\Projects\fiap-global-solution
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.7
+collecting ... collected 39 items
+
+tests\test_api_flow.py::test_health PASSED                               [  2%]
+tests\test_api_flow.py::test_consent_is_required PASSED                  [  5%]
+tests\test_api_flow.py::test_short_text_is_rejected PASSED               [  7%]
+tests\test_api_flow.py::test_full_flow_with_photo_and_personal_data PASSED [ 10%]
+tests\test_api_flow.py::test_same_text_again_returns_same_protocol PASSED [ 12%]
+tests\test_api_flow.py::test_groups_reports_about_the_same_barrier PASSED [ 15%]
+tests\test_api_flow.py::test_ambiguous_text_goes_to_human_triage PASSED  [ 17%]
+tests\test_api_flow.py::test_agency_status_update PASSED                 [ 20%]
+tests\test_api_flow.py::test_robot_escalates_missed_deadline PASSED      [ 23%]
+tests\test_api_flow.py::test_right_to_erasure PASSED                     [ 25%]
+tests\test_api_flow.py::test_iot_rejects_invalid_event[flying] PASSED    [ 28%]
+tests\test_api_flow.py::test_iot_obstruction_confirmation_clearance PASSED [ 30%]
+tests\test_api_flow.py::test_retention_deletes_photos_of_old_resolved_reports PASSED [ 33%]
+tests\test_api_flow.py::test_indicators PASSED                           [ 35%]
+tests\test_governance.py::test_masks_cpf_phone_email PASSED              [ 38%]
+tests\test_governance.py::test_unformatted_cpf_is_not_taken_as_phone PASSED [ 41%]
+tests\test_governance.py::test_masks_plate_and_name PASSED               [ 43%]
+tests\test_governance.py::test_no_false_positive_on_ordinary_text PASSED [ 46%]
+tests\test_governance.py::test_pseudonym_is_deterministic_and_irreversible PASSED [ 48%]
+tests\test_governance.py::test_reduces_coordinate_precision PASSED       [ 51%]
+tests\test_nlp.py::test_normalize_removes_accents_markers_and_digits PASSED [ 53%]
+tests\test_nlp.py::test_tokenize_removes_stopwords PASSED                [ 56%]
+tests\test_nlp.py::test_classifies_clear_reports[there is a huge hole in the sidewalk on my street-damaged_sidewalk] PASSED [ 58%]
+tests\test_nlp.py::test_classifies_clear_reports[car parked on top of the sidewalk every day-sidewalk_obstruction] PASSED [ 61%]
+tests\test_nlp.py::test_classifies_clear_reports[the corner has no ramp for wheelchairs-ramp_access] PASSED [ 64%]
+tests\test_nlp.py::test_classifies_clear_reports[the tactile paving ends at a pole-tactile_paving] PASSED [ 66%]
+tests\test_nlp.py::test_classifies_clear_reports[pedestrian traffic light without an audible signal-crossing_signal] PASSED [ 69%]
+tests\test_nlp.py::test_classifies_clear_reports[the metro station elevator is broken-accessible_transit] PASSED [ 71%]
+tests\test_nlp.py::test_meaningless_text_goes_to_human_review PASSED     [ 74%]
+tests\test_nlp.py::test_urgency_rises_with_risk_signals PASSED           [ 76%]
+tests\test_nlp.py::test_extract_address[hole on Rua Augusta, 1500 near the metro-Rua Augusta, 1500] PASSED [ 79%]
+tests\test_nlp.py::test_extract_address[broken ramp on Av. Paulista in front of the bank-Av. Paulista] PASSED [ 82%]
+tests\test_nlp.py::test_extract_address[cracked sidewalk at 220 Oak Street near the school-Oak Street, 220] PASSED [ 84%]
+tests\test_nlp.py::test_extract_address[I had to walk into the street among the cars-None] PASSED [ 87%]
+tests\test_vision.py::test_smooth_sidewalk_has_no_damage PASSED          [ 89%]
+tests\test_vision.py::test_sidewalk_with_cracks_and_pothole_is_severe PASSED [ 92%]
+tests\test_vision.py::test_straight_paving_joints_do_not_count_as_cracks PASSED [ 94%]
+tests\test_vision.py::test_removes_exif_metadata PASSED                  [ 97%]
+tests\test_vision.py::test_invalid_file PASSED                           [100%]
+
+============================= 39 passed in 2.89s ==============================

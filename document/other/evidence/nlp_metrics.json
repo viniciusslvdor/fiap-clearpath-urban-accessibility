@@ -1,0 +1,79 @@
+{
+  "chosen_model": "Logistic Regression (words + characters)",
+  "comparison": [
+    {
+      "model": "Naive Bayes (words)",
+      "f1_cv": 0.9977,
+      "f1_cv_std": 0.0045,
+      "f1_blind_test": 0.8991,
+      "accuracy_blind_test": 0.9
+    },
+    {
+      "model": "Logistic Regression (words + characters)",
+      "f1_cv": 1.0,
+      "f1_cv_std": 0.0,
+      "f1_blind_test": 0.8987,
+      "accuracy_blind_test": 0.9
+    },
+    {
+      "model": "Calibrated linear SVM (words + characters)",
+      "f1_cv": 1.0,
+      "f1_cv_std": 0.0,
+      "f1_blind_test": 0.8814,
+      "accuracy_blind_test": 0.8833
+    }
+  ],
+  "blind_test_report": {
+    "accessible_transit": {
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1-score": 0.9090909090909091,
+      "support": 10.0
+    },
+    "crossing_signal": {
+      "precision": 0.9,
+      "recall": 0.9,
+      "f1-score": 0.9,
+      "support": 10.0
+    },
+    "damaged_sidewalk": {
+      "precision": 0.9,
+      "recall": 0.9,
+      "f1-score": 0.9,
+      "support": 10.0
+    },
+    "ramp_access": {
+      "precision": 0.9090909090909091,
+      "recall": 1.0,
+      "f1-score": 0.9523809523809523,
+      "support": 10.0
+    },
+    "sidewalk_obstruction": {
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1-score": 0.8888888888888888,
+      "support": 10.0
+    },
+    "tactile_paving": {
+      "precision": 0.8888888888888888,
+      "recall": 0.8,
+      "f1-score": 0.8421052631578947,
+      "support": 10.0
+    },
+    "accuracy": 0.9,
+    "macro avg": {
+      "precision": 0.9052188552188554,
+      "recall": 0.8999999999999999,
+      "f1-score": 0.898744335586441,
+      "support": 60.0
+    },
+    "weighted avg": {
+      "precision": 0.9052188552188551,
+      "recall": 0.9,
+      "f1-score": 0.8987443355864407,
+      "support": 60.0
+    }
+  },
+  "n_train": 1320,
+  "n_blind_test": 60
+}

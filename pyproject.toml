@@ -1,0 +1,43 @@
+[project]
+name = "clearpath"
+version = "1.0.0"
+description = "ClearPath: accessibility barriers, reported and resolved (FIAP Global Solution 2026.2 POC)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.165.0",
+    "uvicorn[standard]>=0.54.0",
+    "python-multipart>=0.0.34",
+    # pinned: the trained model (src/backend/models/report_classifier.joblib) is tied to this version
+    "scikit-learn==1.9.1",
+    "numpy>=2.5",
+    "pandas>=3.1",
+    "opencv-python-headless>=5.1",
+    "matplotlib>=3.11",
+    "paho-mqtt>=2.2",
+    "joblib>=1.6",
+]
+
+[dependency-groups]
+# installed by default with `uv sync`
+dev = [
+    "pytest>=9.2",
+    "httpx2>=2.16.2",     # FastAPI TestClient (starlette deprecated plain httpx)
+    "jupyter>=1.1",       # notebooks
+    "nbconvert>=7.17",
+    "markdown>=3.11",     # report PDF generation (src/tools/build_pdf.py)
+]
+
+[tool.uv]
+# application, not a library: uv only manages the environment, it does not build/install the project
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["src/backend/tests"]
+
+[tool.pyright]
+# lets Pylance/pyright resolve `clearpath` and the helper scripts imported by the notebooks and tests
+extraPaths = ["src/backend", "src/backend/scripts"]
+# a config section switches Pylance to "standard" type checking; keep the editor default (imports only),
+# otherwise pandas/OpenCV stubs flag false positives (NAType, MatLike | None) in code that runs fine
+typeCheckingMode = "off"

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "author": "ClearPath - FIAP Global Solution 2026.2",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "sonar", "top": -142, "left": -158, "attrs": { "distance": "300" } },
+    { "type": "wokwi-pushbutton", "id": "button", "top": 160, "left": 190, "attrs": { "color": "blue", "label": "Confirm blockage" } },
+    { "type": "wokwi-led", "id": "led_red", "top": -40, "left": 230, "attrs": { "color": "red", "label": "Blocked" } },
+    { "type": "wokwi-led", "id": "led_green", "top": -40, "left": 290, "attrs": { "color": "green", "label": "Clear" } },
+    { "type": "wokwi-resistor", "id": "r_red", "top": 40, "left": 200, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_green", "top": 40, "left": 260, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 150, "left": -150, "attrs": { "volume": "0.2" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "sonar:VCC", "esp:5V", "red", [] ],
+    [ "sonar:GND", "esp:GND.1", "black", [] ],
+    [ "sonar:TRIG", "esp:5", "orange", [] ],
+    [ "sonar:ECHO", "esp:18", "purple", [] ],
+    [ "button:1.l", "esp:4", "blue", [] ],
+    [ "button:2.l", "esp:GND.2", "black", [] ],
+    [ "esp:26", "r_red:1", "red", [] ],
+    [ "r_red:2", "led_red:A", "red", [] ],
+    [ "led_red:C", "esp:GND.3", "black", [] ],
+    [ "esp:27", "r_green:1", "green", [] ],
+    [ "r_green:2", "led_green:A", "green", [] ],
+    [ "led_green:C", "esp:GND.3", "black", [] ],
+    [ "esp:25", "buzzer:2", "gold", [] ],
+    [ "buzzer:1", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

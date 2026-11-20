@@ -1,0 +1,7 @@
+text,category,source,predicted
+I tripped on a raised concrete slab near the corner store,damaged_sidewalk,hand_written,crossing_signal
+there is a pile of sand and bricks from a renovation covering the path,sidewalk_obstruction,hand_written,tactile_paving
+Street vendors occupy the entire sidewalk at the terminal exit,sidewalk_obstruction,hand_written,damaged_sidewalk
+There is no floor signage for cane users in the square,tactile_paving,hand_written,accessible_transit
+Pieces of the directional tiles are missing on the terminal ramp,tactile_paving,hand_written,ramp_access
+"The zebra stripes are gone from wear, drivers don't even stop",crossing_signal,hand_written,accessible_transit

@@ -1,0 +1,64 @@
+# ---------------------------------------------------------------------------
+# ClearPath: files that must NOT go to GitHub.
+# Committed on purpose: uv.lock, .python-version, the trained model (.joblib),
+# the datasets and demo images in src/data/, the report PDF and the executed notebooks.
+# ---------------------------------------------------------------------------
+
+# --- Python / uv ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Node / React (Vite) ---
+node_modules/
+dist/
+.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Runtime data created by the app (database, uploaded photos, letters, robot reports) ---
+src/data/runtime/
+*.sqlite3
+*.db
+*.eml
+
+# --- Generated intermediate file (the PDF itself is committed) ---
+document/other/relatorio.html
+
+# --- Secrets and local configuration ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Logs and temporary files ---
+*.log
+*.tmp
+*.bak
+*~
+
+# --- Editors and operating systems ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Claude Code local settings ---
+.claude/settings.local.json

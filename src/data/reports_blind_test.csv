@@ -1,0 +1,61 @@
+text,category,source
+"The sidewalk on my street looks like Swiss cheese, holes everywhere",damaged_sidewalk,hand_written
+"I tripped on a raised concrete slab near the corner store",damaged_sidewalk,hand_written
+"the pavement sank after the rain and turned into a ditch",damaged_sidewalk,hand_written
+"There is a piece of the sidewalk that simply doesn't exist anymore, just dirt",damaged_sidewalk,hand_written
+"big cracks in the walkway, the wheelchair wheels get caught",damaged_sidewalk,hand_written
+"uneven paving full of patches, old people fall all the time",damaged_sidewalk,hand_written
+"The tree roots broke all the paving in front of number 300",damaged_sidewalk,hand_written
+"Loose tiles that wobble when you step on them",damaged_sidewalk,hand_written
+"the walkway has a 15 cm step out of nowhere",damaged_sidewalk,hand_written
+"The utility company dug up the sidewalk and never repaired it",damaged_sidewalk,hand_written
+"A truck stays parked on the walkway the whole day",sidewalk_obstruction,hand_written
+"The furniture store displays sofas on the sidewalk and there is no room left",sidewalk_obstruction,hand_written
+"Piled up trash taking the whole walkway, I have to walk on the road",sidewalk_obstruction,hand_written
+"there is a pile of sand and bricks from a renovation covering the path",sidewalk_obstruction,hand_written
+"The car wash lines up the cars on the sidewalk",sidewalk_obstruction,hand_written
+"A tree came down and nobody removed it, it is blocking the way",sidewalk_obstruction,hand_written
+"The restaurant puts its tables all the way to the curb",sidewalk_obstruction,hand_written
+"E-scooters dumped across the middle of the walkway",sidewalk_obstruction,hand_written
+"car parked right in front of the ramp again",sidewalk_obstruction,hand_written
+"Street vendors occupy the entire sidewalk at the terminal exit",sidewalk_obstruction,hand_written
+"To get from the road onto the sidewalk there is a high step, no ramp at all",ramp_access,hand_written
+"The corner ramp is so inclined it feels like a slide",ramp_access,hand_written
+"They built the ramp but it ends right on top of a storm drain",ramp_access,hand_written
+"The neighborhood clinic only has a staircase at the entrance",ramp_access,hand_written
+"none of the four corners has a lowered curb",ramp_access,hand_written
+"cracked access ramp with the rebar showing",ramp_access,hand_written
+"On the other side of the crosswalk there is no curb cut, I get stuck on the road",ramp_access,hand_written
+"The ramp is so narrow the chair doesn't fit",ramp_access,hand_written
+"Municipal school with no wheelchair access, only steps",ramp_access,hand_written
+"The library ramp has no handrail and is very steep",ramp_access,hand_written
+"The raised guide path for blind people was torn out during the renovation",tactile_paving,hand_written
+"I am blind and the guide strip took me straight into a trash bin",tactile_paving,hand_written
+"There is no floor signage for cane users in the square",tactile_paving,hand_written
+"the tactile path just stops in the middle of the walkway",tactile_paving,hand_written
+"They paved asphalt over the warning tiles at the corner",tactile_paving,hand_written
+"At the station the tactile floor is completely worn",tactile_paving,hand_written
+"They installed tactile tiles the same color as the floor, people with low vision can't see them",tactile_paving,hand_written
+"The warning blocks are loose and someone may trip",tactile_paving,hand_written
+"The tactile line runs under a newsstand",tactile_paving,hand_written
+"Pieces of the directional tiles are missing on the terminal ramp",tactile_paving,hand_written
+"The walk signal stays green for about 5 seconds only",crossing_signal,hand_written
+"I need to cross the avenue and there is no pedestrian signal at all",crossing_signal,hand_written
+"The zebra stripes are gone from wear, drivers don't even stop",crossing_signal,hand_written
+"The beeping signal for blind people stopped working",crossing_signal,hand_written
+"i pressed the button at the light and nothing happens",crossing_signal,hand_written
+"Intersection with no crosswalk in front of the school, children are at risk",crossing_signal,hand_written
+"The pedestrian light has been switched off since the storm",crossing_signal,hand_written
+"Elderly people cannot cross within the signal time",crossing_signal,hand_written
+"Six lane avenue with no median to wait in the middle",crossing_signal,hand_written
+"Crosswalk painted where there is no curb cut and no signal",crossing_signal,hand_written
+"The station lift has been out of order for a month",accessible_transit,hand_written
+"The driver said the bus platform lift does not work",accessible_transit,hand_written
+"The bus drove right past when it saw my wheelchair",accessible_transit,hand_written
+"Inside the train they don't announce the stations, as a blind person I get lost",accessible_transit,hand_written
+"The bus stop is on a dirt slope with no pavement",accessible_transit,hand_written
+"The gap between the train and the platform is dangerous",accessible_transit,hand_written
+"Metro with no tactile map and no braille information",accessible_transit,hand_written
+"The reserved spot on the bus had no belt for the wheelchair",accessible_transit,hand_written
+"Both the escalator and the elevator at the terminal are closed",accessible_transit,hand_written
+"The late night bus line has no adapted vehicle",accessible_transit,hand_written

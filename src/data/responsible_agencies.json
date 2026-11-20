@@ -1,0 +1,45 @@
+{
+  "_notice": "DEMO routing table. The agencies are the real ones responsible in São Paulo, but the e-mail addresses are fictitious (.invalid domain) and no letter is actually sent: the .eml files stay in src/data/runtime/letters.",
+  "categories": {
+    "damaged_sidewalk": {
+      "agency": "Subprefecture (sidewalk maintenance)",
+      "email": "sidewalk.maintenance@subprefecture.invalid",
+      "legal_basis": "São Paulo Municipal Law 15,442/2011 (sidewalks) and ABNT NBR 9050:2020 (Brazilian accessibility standard), item 6.12"
+    },
+    "sidewalk_obstruction": {
+      "agency": "Subprefecture (inspection) + CET (vehicles)",
+      "email": "sidewalk.inspection@subprefecture.invalid",
+      "legal_basis": "Brazilian Traffic Code (CTB) art. 181, VIII (parking on the sidewalk) and Municipal Law 15,442/2011"
+    },
+    "ramp_access": {
+      "agency": "Municipal Secretariat for Persons with Disabilities (SMPED) + Subprefecture",
+      "email": "accessibility.ramps@smped.invalid",
+      "legal_basis": "Law 13,146/2015 (Brazilian Inclusion Law), art. 53 and ABNT NBR 9050:2020, item 6.6"
+    },
+    "tactile_paving": {
+      "agency": "Municipal Secretariat for Persons with Disabilities (SMPED)",
+      "email": "tactile.signage@smped.invalid",
+      "legal_basis": "ABNT NBR 16537 (tactile floor signage) and Law 10,098/2000"
+    },
+    "crossing_signal": {
+      "agency": "CET - Traffic Engineering Company",
+      "email": "pedestrian.signals@cet.invalid",
+      "legal_basis": "Brazilian Traffic Code (CTB) arts. 70 and 71 and Law 10,098/2000, art. 9 (audible pedestrian signals)"
+    },
+    "accessible_transit": {
+      "agency": "SPTrans / Metro / CPTM (depending on the mode)",
+      "email": "transit.accessibility@sptrans.invalid",
+      "legal_basis": "Law 13,146/2015, arts. 46 to 52 and Decree 5,296/2004"
+    }
+  },
+  "ombudsman": {
+    "agency": "Municipal Ombudsman's Office",
+    "email": "ombudsman@cityhall.invalid"
+  },
+  "sla_days": {
+    "critical": 2,
+    "high": 5,
+    "medium": 15,
+    "low": 30
+  }
+}

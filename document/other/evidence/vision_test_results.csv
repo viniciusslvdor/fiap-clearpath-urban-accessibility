@@ -1,0 +1,46 @@
+file,true_level,source,damage_index,level,crack_pct,pothole_pct,joints_removed,crack_components
+no_visible_damage_00.jpg,no visible damage,synthetic,9.1,moderate,1.01,0.0,28,9
+no_visible_damage_01.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_02.jpg,no visible damage,synthetic,2.1,no visible damage,0.23,0.0,24,3
+no_visible_damage_03.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_04.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_05.jpg,no visible damage,synthetic,2.7,no visible damage,0.3,0.0,33,2
+no_visible_damage_06.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,35,0
+no_visible_damage_07.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,35,0
+no_visible_damage_08.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,44,0
+no_visible_damage_09.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_10.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_11.jpg,no visible damage,synthetic,13.4,moderate,0.86,0.95,32,8
+no_visible_damage_12.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_13.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+no_visible_damage_14.jpg,no visible damage,synthetic,0.0,no visible damage,0.0,0.0,0,0
+moderate_00.jpg,moderate,synthetic,7.5,moderate,0.84,0.0,48,4
+moderate_01.jpg,moderate,synthetic,7.7,moderate,0.57,0.44,32,3
+moderate_02.jpg,moderate,synthetic,5.4,no visible damage,0.6,0.0,0,1
+moderate_03.jpg,moderate,synthetic,8.2,moderate,0.91,0.0,0,1
+moderate_04.jpg,moderate,synthetic,15.1,moderate,1.68,0.0,0,3
+moderate_05.jpg,moderate,synthetic,6.4,moderate,0.71,0.0,0,1
+moderate_06.jpg,moderate,synthetic,5.5,no visible damage,0.61,0.0,0,1
+moderate_07.jpg,moderate,synthetic,5.9,no visible damage,0.65,0.0,35,3
+moderate_08.jpg,moderate,synthetic,19.3,moderate,2.14,0.0,21,12
+moderate_09.jpg,moderate,synthetic,13.7,moderate,0.77,1.13,0,1
+moderate_10.jpg,moderate,synthetic,6.5,moderate,0.44,0.42,35,2
+moderate_11.jpg,moderate,synthetic,12.7,moderate,1.41,0.0,0,2
+moderate_12.jpg,moderate,synthetic,12.4,moderate,1.38,0.0,0,2
+moderate_13.jpg,moderate,synthetic,18.7,moderate,1.45,0.94,27,6
+moderate_14.jpg,moderate,synthetic,6.1,moderate,0.68,0.0,35,2
+severe_00.jpg,severe,synthetic,59.5,severe,3.99,3.94,0,4
+severe_01.jpg,severe,synthetic,52.1,severe,2.8,4.49,0,4
+severe_02.jpg,severe,synthetic,56.0,severe,2.29,5.89,0,4
+severe_03.jpg,severe,synthetic,42.7,severe,3.54,1.81,29,11
+severe_04.jpg,severe,synthetic,56.6,severe,3.81,3.72,0,5
+severe_05.jpg,severe,synthetic,24.9,moderate,1.76,1.52,51,5
+severe_06.jpg,severe,synthetic,46.1,severe,1.66,5.19,0,3
+severe_07.jpg,severe,synthetic,75.3,severe,4.56,5.71,16,6
+severe_08.jpg,severe,synthetic,50.9,severe,3.83,2.74,0,4
+severe_09.jpg,severe,synthetic,50.3,severe,3.78,2.72,0,1
+severe_10.jpg,severe,synthetic,76.0,severe,4.67,5.67,20,16
+severe_11.jpg,severe,synthetic,35.2,severe,2.33,2.37,0,3
+severe_12.jpg,severe,synthetic,43.5,severe,2.89,2.92,29,7
+severe_13.jpg,severe,synthetic,30.6,severe,2.44,1.44,0,4
+severe_14.jpg,severe,synthetic,39.6,severe,2.29,3.16,18,14

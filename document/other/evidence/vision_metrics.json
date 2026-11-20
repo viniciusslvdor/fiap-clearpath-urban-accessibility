@@ -1,0 +1,32 @@
+{
+  "test_accuracy": 0.8667,
+  "confusion_matrix": {
+    "labels": [
+      "no visible damage",
+      "moderate",
+      "severe"
+    ],
+    "values": [
+      [
+        13,
+        2,
+        0
+      ],
+      [
+        3,
+        12,
+        0
+      ],
+      [
+        0,
+        1,
+        14
+      ]
+    ]
+  },
+  "thresholds": {
+    "moderate": 6,
+    "severe": 27
+  },
+  "n_images": 45
+}
