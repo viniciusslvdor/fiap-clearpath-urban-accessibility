@@ -4,7 +4,7 @@
 2. Final evaluation on the BLIND TEST set (60 sentences written separately,
    with vocabulary different from the generator's templates). This is the most honest metric.
 3. Saves the best pipeline to models/, the charts to assets/charts/ and the metrics to
-   document/other/evidence/.
+   docs/other/evidence/.
 
 Usage:
     uv run python scripts/train_model.py

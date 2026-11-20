@@ -1,6 +1,6 @@
 """Process automation for routing (the "robot" that replaces manual triage).
 
-Automated flow (see document/architecture.md, simplified BPMN diagram):
+Automated flow (see docs/architecture.md, simplified BPMN diagram):
   received -> [classify, prioritize, group] -> forwarded (generates an .eml letter to the agency)
   -> in_progress -> resolved
   If the deadline (SLA) expires without resolution: escalated (letter to the Ombudsman).

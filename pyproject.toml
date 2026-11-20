@@ -25,7 +25,7 @@ dev = [
     "httpx2>=2.16.2",     # FastAPI TestClient (starlette deprecated plain httpx)
     "jupyter>=1.1",       # notebooks
     "nbconvert>=7.17",
-    "markdown>=3.11",     # report PDF generation (src/tools/build_pdf.py)
+    "markdown>=3.11",     # local report PDF generation (src/tools/build_pdf.py, not in Git)
 ]
 
 [tool.uv]

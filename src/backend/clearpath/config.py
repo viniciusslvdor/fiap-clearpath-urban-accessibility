@@ -11,7 +11,7 @@ DATA_DIR = SRC_ROOT / "data"
 
 # Evidence produced by the evaluation scripts
 CHARTS_DIR = REPO_ROOT / "assets" / "charts"
-EVIDENCE_DIR = REPO_ROOT / "document" / "other" / "evidence"
+EVIDENCE_DIR = REPO_ROOT / "docs" / "other" / "evidence"
 
 # Files created at runtime (database, processed photos, letters) stay out of Git.
 RUNTIME_DIR = Path(os.getenv("CLEARPATH_RUNTIME", DATA_DIR / "runtime"))

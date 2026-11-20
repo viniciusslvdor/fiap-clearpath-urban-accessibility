@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # ClearPath: files that must NOT go to GitHub.
 # Committed on purpose: uv.lock, .python-version, the trained model (.joblib),
-# the datasets and demo images in src/data/, the report PDF and the executed notebooks.
+# the datasets and demo images in src/data/ and the executed notebooks.
 # ---------------------------------------------------------------------------
 
 # --- Python / uv ---
@@ -36,8 +36,11 @@ src/data/runtime/
 *.db
 *.eml
 
-# --- Generated intermediate file (the PDF itself is committed) ---
-document/other/relatorio.html
+# --- Submission report: local only (delivered on the FIAP platform; contains the video link) ---
+docs/relatorio.md
+docs/*.pdf
+docs/other/relatorio.html
+src/tools/
 
 # --- Secrets and local configuration ---
 .env

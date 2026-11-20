@@ -45,11 +45,9 @@ Brazil's 2022 Census (IBGE) counted **14.4 million people with disabilities** (7
 | Automated tests | **39 passing** | `pytest` |
 | End-to-end MQTT | 4/4 messages processed | public HiveMQ broker |
 
-The training data and sidewalk images are **synthetic**, and the dashboard uses **simulated** dates and agency responses; all of this is identified in the report. The letters are `.eml` files generated locally and are not sent to real agencies.
+The training data and sidewalk images are **synthetic**, and the dashboard uses **simulated** dates and agency responses; all of this is identified in [`src/data/README.md`](src/data/README.md). The letters are `.eml` files generated locally and are not sent to real agencies.
 
 **Links:**
-- 📄 Report (PDF, in Portuguese): [`document/ClearPath_GS2026-2_relatorio.pdf`](document/ClearPath_GS2026-2_relatorio.pdf)
-- 🎥 Demo video (YouTube, unlisted): [https://youtu.be/rzzJpT7O9WU](https://youtu.be/rzzJpT7O9WU)
 - 🔌 Wokwi simulation: [https://wokwi.com/projects/481174110278029313](https://wokwi.com/projects/481174110278029313)
 - **Competition participation:** [ ] Yes, I accept to participate / [x] I will not participate.
 
@@ -60,10 +58,9 @@ Among the files and folders present in the root of the project, the following ar
 
 - <b>assets</b>: contains the files related to unstructured elements of this repository, such as images.
   - `charts/`: evaluation charts (model comparison, confusion matrix, damage index, vision pipeline steps).
-  - `screenshots/`: screenshot of the React app used in the report.
+  - `screenshots/`: screenshot of the React app (report submission result).
 
-- <b>document</b>: contains all the project documents requested throughout the activities. In the "other" subfolder, add complementary and less important documents.
-  - `ClearPath_GS2026-2_relatorio.pdf`: the submission report, in Portuguese (generated from `relatorio.md`).
+- <b>docs</b>: contains all the project documents requested throughout the activities. In the "other" subfolder, add complementary and less important documents.
   - `architecture.md`, `data_governance.md`.
   - `other/evidence/`: metrics (JSON/CSV), blind-test errors and the full `pytest` output.
 
@@ -76,7 +73,6 @@ Among the files and folders present in the root of the project, the following ar
   - `frontend/`: React app (Vite, Leaflet, Recharts).
   - `iot/`: ESP32 firmware and circuit for Wokwi, Node-RED flow and [instructions](src/iot/README.md).
   - `data/`: datasets and agency table, with a [README](src/data/README.md) describing origin and limitations. `data/runtime/` (database, photos, letters) is created at runtime and kept out of Git.
-  - `tools/build_pdf.py`: builds the report PDF with the real source code embedded as text.
 
 - <b>pyproject.toml</b> and <b>uv.lock</b>: Python dependencies, managed with [uv](https://docs.astral.sh/uv/). `uv.lock` pins the exact versions that were tested; `.python-version` selects Python 3.13.
 
@@ -119,13 +115,12 @@ To see all results without starting the servers, open `notebooks/results_overvie
 
 ESP32 on Wokwi and Node-RED: see [`src/iot/README.md`](src/iot/README.md).
 
-To rebuild the report PDF (from the repository root): `uv run python src/tools/build_pdf.py` (uses the installed Google Chrome or Microsoft Edge).
 
 
 ## Release history
 
 * 1.0.0 - 2026-11-19
-    * First complete version of the ClearPath POC: FastAPI backend, NLP classifier, computer vision, process automation, ESP32/MQTT sensor, React app and submission report.
+    * First complete version of the ClearPath POC: FastAPI backend, NLP classifier, computer vision, process automation, ESP32/MQTT sensor, React app and notebooks.
 
 ## License
 
